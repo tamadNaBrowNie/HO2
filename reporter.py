@@ -1,9 +1,19 @@
-from mysql.connector import connect
+import mysql.connector as sql
+
+
+#TODO: make a conf option
+
 args = []
 param = ['user','password','host','port','database']
 for prompt in prompts:
 	params.append(input(prompt))
 config =dict(zip(param,args))
-db = connect(**params)
-cursor = db.cursor()
+try:
+	db = sql.connect(**params)
+	cursor = db.cursor()
+
+except sql.Error as err:
+#TODO: handle errors.
+	pass
+
 
