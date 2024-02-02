@@ -18,8 +18,9 @@ def report(cursor):
         name = input('Name it.')
         about = input('Describe it.')
         query = input('Query for it!') #TODO: Shawn, if they say this works, try to make an optimized query
+        header = ':'.join(name,about)
         reply = query(cursor,query)
-        report = '\n'.join(name,about,query)
+        report = '\n'.join(header,'Results:\n',query)
         print(report) #TODO: write to file instead
 
 code = input('where config? 1 for default, 2 to create, 3 to load')
