@@ -6,7 +6,7 @@ def query(cursor,query):
     try:
         reply = cursor.execute(query)
         data = reply.fetchall()
-        record = (','.join(row) for row in data)
+        record = (row for row in data)
         output = '\n'.join(record)
         
     except sql.Error as err: output = str(err)
@@ -17,24 +17,24 @@ def save(report):
     with open(path, 'w') as f:f.write(report)
 def report(cursor):
     while True:
-        reply = input('Generate report? [Y]es/[N]o').lower()
+        reply = input('Generate report? [Y]es/[N]o: ').lower()
         if reply != 'y':break
-        name = input('Name it.')
-        about = input('Describe it.')
-        query = input('Query for it!') #TODO: Shawn, if they say this works, try to make an optimized query
+        name = input('Name it. ')
+        about = input('Describe it. ')
+        query = input('Query for it! ') #TODO: Shawn, if they say this works, try to make an optimized query
         header = ':'.join(name,about)
         reply = query(cursor,query)
-        report = '\n'.join(header,'Results:\n',query)
+        report = '\n'.join((header,'Results:\n',query))
         sys.stdout.write(report) #TODO: write to file instead
-        toSave = input('Save to file? [Y]es/[N]o').lower()
+        toSave = input('Save to file? [Y]es/[N]o: ').lower()
         if toSave == 'y':save(report)
             
 		
-code = input('where config? 1 to create, 2 to load')
+code = input('where config? 1 to create, 2 to load\n')
 #TODO: make a working conf option
 def enter():	
 	param = ['user','password','host','port','database']
-	args = [input(prompt) for prompt in param]
+	args = [input(f'{prompt}: ') for prompt in param]
 	return dict(zip(param,args))
 
 def load():
