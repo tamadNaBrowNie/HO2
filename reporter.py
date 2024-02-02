@@ -47,6 +47,7 @@ config = configs[code]
 msg = 'fin'
 try:
 	db = sql.connect(**config)
+	sys.stdout.write(f'welcome {config["user"] }')
 	cursor = db.cursor()
 	report(cursor)
 except sql.Error as err: msg = str(err)
