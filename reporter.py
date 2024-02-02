@@ -14,6 +14,7 @@ def report(cursor):
     while True:
         reply = input('Generate report? [Y]es/[N]o').lower()
         if reply != 'y':break
+        path = input('Save where?')
         name = input('Name it.')
         about = input('Describe it.')
         query = input('Query for it!') #TODO: Shawn, if they say this works, try to make an optimized query
@@ -21,7 +22,9 @@ def report(cursor):
         reply = query(cursor,query)
         report = '\n'.join(header,'Results:\n',query)
         print(report) #TODO: write to file instead
-
+        with open(path, 'w') as f:
+            f.write(report)
+		
 code = input('where config? 1 for default, 2 to create, 3 to load')
 #TODO: make a working conf option
 def enter():	
