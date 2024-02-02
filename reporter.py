@@ -5,10 +5,11 @@ def query(cursor,query):
     try:
         reply = cursor.execute(query)
         data = reply.fetchall()
-        for row in data: print (row)
-        
-    except sql.Error as err:print(err)
-    # finally:
+        record = (','.join(row) for row in data)
+        output = '\n'.join(record)
+        return output
+    except sql.Error as err:return str(err) #TODO: convert to proper error name
+    finally: return 'smth broke'
 def report(cursor):
 
     while True:
@@ -18,8 +19,8 @@ def report(cursor):
         about = input('Describe it.')
         query = input('Query for it!') #TODO: Shawn, if they say this works, try to make an optimized query
         reply = query(cursor,query)
-        
-        
+        report = '\n'.join(name,about,query)
+        print(report) #TODO: write to file instead
 
 code = input('where config? 1 for default, 2 to create, 3 to load')
 #TODO: make a working conf option
