@@ -15,5 +15,6 @@ try:
 except sql.Error as err:
 #TODO: handle errors.
 	pass
+#TODO: include row lock then roll back
 
 
