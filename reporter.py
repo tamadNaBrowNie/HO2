@@ -11,7 +11,6 @@ def query(cursor,query):
     except sql.Error as err:return str(err) #TODO: convert to proper error name
     finally: return 'smth broke'
 def report(cursor):
-
     while True:
         reply = input('Generate report? [Y]es/[N]o').lower()
         if reply != 'y':break
@@ -41,7 +40,7 @@ config = configs[code]
 try:
 	db = sql.connect(**config)
 	cursor = db.cursor()
-
+	report(cursor)
 except sql.Error as err:
     print(err)
 #TODO: handle errors.
