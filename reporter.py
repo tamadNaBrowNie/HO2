@@ -4,7 +4,7 @@
 import sys
 from sqlconn import *
 
-def report(cursor):
+def generate(cursor):
     while True:
         reply = input('Generate report? [Y]es/[N]o: ').lower()
         if reply != 'y':break
@@ -45,7 +45,7 @@ code = input('where config? 1 to create, 2 to load\n')
 try:
     config = configs[code]()
     cursor = connect(config)
-    report(cursor)
+    generate(cursor)
 except KeyError: sys.stdout.write(f'{code} is an invalid input')
 except ValueError: sys.stdout.write('\nServer Login failed.')
 #TODO: handle errors.

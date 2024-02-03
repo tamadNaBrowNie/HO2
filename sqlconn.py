@@ -6,7 +6,7 @@ def report(cursor,query):
     try:
         cursor.execute(query)
         data = cursor.fetchall()
-        record = (str(row) for row in data)
+        record = (','.join(row) for row in data)
         output = '\n'.join(record)
         return output
     except sql.Error as err: return str(err) #TODO: future maintainer, raise appropriate python equivalent
