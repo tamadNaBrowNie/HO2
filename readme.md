@@ -4,6 +4,7 @@
 ### generate a report from db
 @params 
 cursor: db cursor
+@params 
 query: mysql query to execute
 
 ## connect
