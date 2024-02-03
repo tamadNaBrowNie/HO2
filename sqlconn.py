@@ -25,6 +25,6 @@ def connect(config):
     except sql.Error as err: 
         msg = str(err)
         raise(ValueError)
-        
-    finally:sys.stdout.write(msg) 
-    return None
+    finally:
+        sys.stdout.write(msg) 
+        return None
