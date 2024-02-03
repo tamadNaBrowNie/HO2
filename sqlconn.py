@@ -14,9 +14,6 @@ def save(report):
     path = input('Save where?')
     with open(path, 'w') as f:f.write(report)
 
-		
-
-
 def enter():	
 	param = ['user','password','host','port','database']
 	args = [input(f'{prompt}: ') for prompt in param]
