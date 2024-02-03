@@ -2,6 +2,7 @@
 #basically install mysql-connecter for python
 import mysql.connector as sql
 import sys
+import csv
 def access(cursor,query):
     try:
         cursor.execute(query)
@@ -31,19 +32,26 @@ def report(cursor):
             
 		
 code = input('where config? 1 to create, 2 to load\n')
-#TODO: make a working conf option
+param = ['user','password','host','port','database']
 def enter():	
-	param = ['user','password','host','port','database']
+	
 	args = [input(f'{prompt}: ') for prompt in param]
 	return dict(zip(param,args))
 
 def load():
-    return {}
+    conf = {}
+    with open(input('Where file')) as f:
+
+        for line in f:
+            (key, val) = line.split(':')
+            conf[key] = val.rstrip()
+        print (conf)
+    return conf
 configs = {
-'1':enter(),
-'2':load()
+'1':enter,
+'2':load
 }
-config = configs[code]
+config = configs[code]()
 msg = 'fin'
 try:
 	db = sql.connect(**config)
