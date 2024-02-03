@@ -2,7 +2,7 @@
 #basically install mysql-connecter for python
 
 import sys
-from sqlconn import *
+from sqlconn import report,connect
 
 def generate(cursor):
     while True:
@@ -13,8 +13,8 @@ def generate(cursor):
         query = input('Query for it! ') #TODO: Shawn, if they say this works, try to make an optimized query
         header = ':'.join((name,about))
         reply = report(cursor,query)
-        report = '\n'.join((header,'Results:\n',reply))
-        sys.stdout.write(report) #TODO: write to file instead
+        txt = '\n'.join((header,'Results:\n',reply))
+        sys.stdout.write(txt) #TODO: write to file instead
         toSave = input('Save to file? [Y]es/[N]o: ').lower()
         if toSave == 'y':save(report)
 def save(report):
