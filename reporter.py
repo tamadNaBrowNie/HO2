@@ -2,16 +2,16 @@
 #basically install mysql-connecter for python
 import mysql.connector as sql
 import sys
-def query(cursor,query):
+def access(cursor,query):
     try:
-        reply = cursor.execute(query)
-        data = reply.fetchall()
-        record = (row for row in data)
+        cursor.execute(query)
+        data = cursor.fetchall()
+        record = (str(row) for row in data)
         output = '\n'.join(record)
-        
-    except sql.Error as err: output = str(err)
+        return output
+    except sql.Error as err: return str(err)
+    except AttributeError: return "wtf?"
     #TODO: convert to proper error name
-    finally: return output
 def save(report):
     path = input('Save where?')
     with open(path, 'w') as f:f.write(report)
@@ -22,9 +22,9 @@ def report(cursor):
         name = input('Name it. ')
         about = input('Describe it. ')
         query = input('Query for it! ') #TODO: Shawn, if they say this works, try to make an optimized query
-        header = ':'.join(name,about)
-        reply = query(cursor,query)
-        report = '\n'.join((header,'Results:\n',query))
+        header = ':'.join((name,about))
+        reply = access(cursor,query)
+        report = '\n'.join((header,'Results:\n',reply))
         sys.stdout.write(report) #TODO: write to file instead
         toSave = input('Save to file? [Y]es/[N]o: ').lower()
         if toSave == 'y':save(report)
