@@ -13,3 +13,5 @@ query: mysql query to execute
 @params
 config: dictionary whose k are the params of mysql.connector.connect and the v are the args to pass.
 
+## reporter.py
+#### sample of report generating script
