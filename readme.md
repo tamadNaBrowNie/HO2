@@ -1,4 +1,4 @@
-# Reporter. i forgot the scheme
+# Generate simple reports with this repo.
 ## sqlconn
 
 ### report
