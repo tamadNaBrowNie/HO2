@@ -1,5 +1,5 @@
 # Generate simple reports with this repo.
-## sqlconn
+## sqlconn functions
 
 ### report
 #### generate a report from db
