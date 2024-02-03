@@ -1,6 +1,6 @@
 import mysql.connector as sql
 import sys
-"""_summary_: query at database cursor. returns a string for the report. returns err as string if sql error. if cursor is inaccessible, returns a special string 
+"""_summary_: query at database cursor. returns a string for the report. returns err as string if sql error. if cursor is inaccessible, raise AttributeError
 """
 def report(cursor,query):
     try:
@@ -9,17 +9,24 @@ def report(cursor,query):
         record = (str(row) for row in data)
         output = '\n'.join(record)
         return output
-    except sql.Error as err: return str(err)
-    except AttributeError: return "wtf?"
+    except sql.Error as err: return str(err) #TODO: future maintainer, raise appropriate python equivalent
+    except AttributeError: 
+        raise (AttributeError)
     #TODO: convert to proper error name
 
+    """
+    connect to open mysql db using config. throws ValueError if config has invalid values
+    """
 def connect(config):
     msg = 'fin'
     try:
         db = sql.connect(**config)
-        sys.stdout.write(f'welcome {config["user"] }')
+        sys.stdout.write(f'welcome {config["user"]}\n')
         cursor = db.cursor()
         return cursor
-    except sql.Error as err: msg = str(err)
+    except sql.Error as err: 
+        msg = str(err)
+        raise(ValueError)
+        
     finally:sys.stdout.write(msg) 
     return None

@@ -3,9 +3,7 @@
 
 import sys
 from sqlconn import *
-def save(report):
-    path = input('Save where?')
-    with open(path, 'w') as f:f.write(report)
+
 def report(cursor):
     while True:
         reply = input('Generate report? [Y]es/[N]o: ').lower()
@@ -19,14 +17,15 @@ def report(cursor):
         sys.stdout.write(report) #TODO: write to file instead
         toSave = input('Save to file? [Y]es/[N]o: ').lower()
         if toSave == 'y':save(report)
+def save(report):
+    path = input('Save where?')
+    with open(path, 'w') as f:f.write(report)
 def load():
     conf = {}
     with open(input('File where? ')) as f:
-
-        for line in f:
-            (key, val) = line.split(':')
-            conf[key] = val.rstrip()
-        print (conf)
+        entries = (line.rstrip().split(':') for line in f)
+        conf = dict(entries)
+    print(conf)
     return conf
 def enter():	
 	param = ['user','password','host','port','database']
@@ -42,6 +41,7 @@ try:
     cursor = connect(config)
     report(cursor)
 except KeyError: sys.stdout.write(f'{code} is an invalid input')
+except ValueError: sys.stdout.write('\nServer Login failed.')
 #TODO: handle errors.
 #TODO: include row lock then roll back
 
