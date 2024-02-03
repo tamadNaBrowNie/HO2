@@ -3,7 +3,7 @@
 ## report
 ### generate a report from db
 @params 
-cursor: db cursor
+cursor: db cursor <br>
 @params 
 query: mysql query to execute
 
