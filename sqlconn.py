@@ -2,6 +2,7 @@ import mysql.connector as sql
 import sys
 """_summary_: query at database cursor. returns a string for the report. returns err as string if sql error. if cursor is inaccessible, raise AttributeError
 """
+
 def report(cursor,query):
     try:
         cursor.execute(query)
@@ -13,7 +14,10 @@ def report(cursor,query):
     except AttributeError: 
         raise (AttributeError)
     #TODO: convert to proper error name
-
+"""_summary_: can pass db instead of query for better chaining with new connect
+"""
+def report(db,query):
+    return report(db.cursor(),query)
     """
     connect to open mysql db using config. throws ValueError if config has invalid values
     """
