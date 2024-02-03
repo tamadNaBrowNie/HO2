@@ -1,6 +1,8 @@
 import mysql.connector as sql
 import sys
-def access(cursor,query):
+"""_summary_: query at database cursor. returns a string for the report. returns err as string if sql error. if cursor is inaccessible, returns a special string 
+"""
+def report(cursor,query):
     try:
         cursor.execute(query)
         data = cursor.fetchall()
@@ -10,24 +12,6 @@ def access(cursor,query):
     except sql.Error as err: return str(err)
     except AttributeError: return "wtf?"
     #TODO: convert to proper error name
-def save(report):
-    path = input('Save where?')
-    with open(path, 'w') as f:f.write(report)
-
-def enter():	
-	param = ['user','password','host','port','database']
-	args = [input(f'{prompt}: ') for prompt in param]
-	return dict(zip(param,args))
-
-def load():
-    conf = {}
-    with open(input('File where? ')) as f:
-
-        for line in f:
-            (key, val) = line.split(':')
-            conf[key] = val.rstrip()
-        print (conf)
-    return conf
 
 def connect(config):
     msg = 'fin'
