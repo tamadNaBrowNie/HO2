@@ -20,6 +20,9 @@ def report(cursor):
 def save(report):
     path = input('Save where?')
     with open(path, 'w') as f:f.write(report)
+    """
+    load a connection a config file
+    """
 def load():
     conf = {}
     with open(input('File where? ')) as f:
@@ -27,6 +30,9 @@ def load():
         conf = dict(entries)
     print(conf)
     return conf
+    """
+    enter config for connectng to db
+    """
 def enter():	
 	param = ['user','password','host','port','database']
 	args = [input(f'{prompt}: ') for prompt in param]
