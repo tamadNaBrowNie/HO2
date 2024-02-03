@@ -21,9 +21,7 @@ def connect(config):
     msg = 'fin'
     try:
         db = sql.connect(**config)
-        sys.stdout.write(f'welcome {config["user"]}\n')
-        cursor = db.cursor()
-        return cursor
+        return db
     except sql.Error as err: 
         msg = str(err)
         raise(ValueError)

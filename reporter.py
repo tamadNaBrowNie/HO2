@@ -4,6 +4,7 @@
 import sys
 from sqlconn import report,connect
 
+
 def generate(cursor):
     while True:
         reply = input('Generate report? [Y]es/[N]o: ').lower()
@@ -44,11 +45,10 @@ configs = {
 code = input('where config? 1 to create, 2 to load\n')
 try:
     config = configs[code]()
-    cursor = connect(config)
+    db = connect(config)
+    cursor = db.cursor()
     generate(cursor)
 except KeyError: sys.stdout.write(f'{code} is an invalid input')
 except ValueError: sys.stdout.write('\nServer Login failed.')
-#TODO: handle errors.
-#TODO: include row lock then roll back
 
 
