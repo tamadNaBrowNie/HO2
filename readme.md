@@ -1,4 +1,5 @@
 # Generate simple reports with this repo.
+#TODO make it graphical ig
 ## sqlconn functions
 
 ### report
